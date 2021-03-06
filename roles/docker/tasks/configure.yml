@@ -17,6 +17,10 @@
 - name: Reset ssh connection to allow user changes to affect current user
   meta: reset_connection
 
+- name: reload systemd
+  command: systemctl daemon-reload
+  when: ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_major_version']|int >= 20
+
 - name: Start the docker service
   systemd:
     name: docker
