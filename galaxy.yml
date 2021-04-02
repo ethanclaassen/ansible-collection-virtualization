@@ -1,6 +1,6 @@
 namespace: "elreydetoda"
 name: "virtualization"
-version: "1.0.45"
+version: "1.0.46"
 readme: "README.md"
 authors:
   - "Mihai Criveti (https://twitter.com/crivetimihai)"
