@@ -19,7 +19,9 @@
   meta: reset_connection
 
 - name: reload systemd
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+  become: yes
   when: ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_major_version']|int >= 20
 
 - name: Start the docker service
