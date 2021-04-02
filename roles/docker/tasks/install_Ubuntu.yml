@@ -43,4 +43,5 @@
 - name: Install Docker snap version
   snap:
     name: docker
+  become: yes
   when: snap_version
