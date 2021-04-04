@@ -50,7 +50,7 @@
 
     - name: Build the collection.
       command: >
-        ansible-galaxy collection build
+        ls
         chdir=../
     - name: Publish the collection.
       command: >
