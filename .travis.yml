@@ -33,7 +33,7 @@ script:
 
 deploy:
   provider: script
-  script: ls && ansible-playbook -i 'localhost,' ci/deploy.yml -e "tag=$TRAVIS_TAG"
+  script: ls && ansible-playbook -i 'localhost,' ci/deploy-playbook.yml -e "tag=$TRAVIS_TAG"
   'on':
     tags: true
     condition: $DISTRO = centos8
