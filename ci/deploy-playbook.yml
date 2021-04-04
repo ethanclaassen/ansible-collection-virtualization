@@ -46,5 +46,5 @@
         chdir=../
     - name: Publish the collection.
       command: >
-        ansible-galaxy collection publish ./elreydetoda-virtualization-{{ tag }}.tar.gz
+        ansible-galaxy collection publish ./{{ namespace }}-{{ collection_name }}-{{ tag }}.tar.gz
         chdir=../
