@@ -42,9 +42,17 @@
 
     - name: Build the collection.
       command: >
+        ls
+      register: tmpz
+
+    - debug:
+        var: tmpz
+
+    - name: Build the collection.
+      command: >
         ansible-galaxy collection build
         chdir=../
     - name: Publish the collection.
       command: >
-        ansible-galaxy collection publish ./geerlingguy-php_roles-{{ tag }}.tar.gz
+        ansible-galaxy collection publish ./elreydetoda-virtualization-{{ tag }}.tar.gz
         chdir=../
