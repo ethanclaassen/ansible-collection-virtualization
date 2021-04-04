@@ -28,7 +28,7 @@ before_script:
 
 script:
   # Run tests.
-  - echo "skip for now..."
+  - echo "skip for now..." && env
   # - ansible-test integration --color --docker geerlingguy/docker-$DISTRO-ansible:latest --python-interpreter $PYTHON_INTERPRETER
 
 deploy:

@@ -42,15 +42,7 @@
 
     - name: Build the collection.
       command: >
-        ls
-      register: tmpz
-
-    - debug:
-        var: tmpz
-
-    - name: Build the collection.
-      command: >
-        ls
+        ansible-galaxy collection build
         chdir=../
     - name: Publish the collection.
       command: >
