@@ -23,17 +23,18 @@ before_script:
   # Move the collection into the required path to make ansible-test work.
   - cd ../
   - mkdir -p ansible_collections/$COLLECTION_NAMESPACE
-  - mv ansible_virtualization ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+  # found on this run: https://travis-ci.com/github/elreydetoda/ansible_virtualization/jobs/495977497
+  - mv "${TRAVIS_REPO_SLUG##*/}" ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
   - cd ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
 
 script:
   # Run tests.
-  - echo "skip for now..." && env
+  - echo "skip for now..."
   # - ansible-test integration --color --docker geerlingguy/docker-$DISTRO-ansible:latest --python-interpreter $PYTHON_INTERPRETER
 
 deploy:
   provider: script
-  script: ansible-playbook -vvv -i 'localhost,' ci/deploy-playbook.yml -e "tag=$TRAVIS_TAG"
+  script: ansible-playbook -i 'localhost,' ci/deploy-playbook.yml -e "tag=$TRAVIS_TAG"
   'on':
     tags: true
     condition: $DISTRO = centos8
