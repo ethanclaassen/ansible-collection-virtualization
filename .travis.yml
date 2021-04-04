@@ -1,75 +1,38 @@
 ---
-sudo: required
+# https://github.com/geerlingguy/ansible-collection-php_roles/blob/dfb2f43dc25b6b5eec4b92fc1409ddd154e3d2ff/.travis.yml
 language: python
-python:
-  - "3.8"
 services: docker
 
-cache:
-  - pip
+env:
+  global:
+    - COLLECTION_NAMESPACE: 'elreydetoda'
+    - COLLECTION_NAME: 'virtualization'
+  matrix:
+    - DISTRO: centos8
+      PYTHON_INTERPRETER: /usr/bin/python3
+    - DISTRO: ubuntu2004
+      PYTHON_INTERPRETER: /usr/bin/python3
 
 install:
+  # Install Ansible.
   - pip install --upgrade pip
   - pip install pipenv
   - pipenv --bare install -d --deploy
 
+before_script:
+  # Move the collection into the required path to make ansible-test work.
+  - cd ../
+  - mkdir -p ansible_collections/$COLLECTION_NAMESPACE
+  - mv ansible_virtualization ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+  - cd ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+
 script:
-  - ansible-lint roles/*
-  - yamllint roles/*
-  # - 'distribution=${distribution} molecule lint'
-  # from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L162
-  - 'distribution=${distribution} molecule test'
+  # Run tests.
+  - ansible-test integration --color --docker geerlingguy/docker-$DISTRO-ansible:latest --python-interpreter $PYTHON_INTERPRETER
 
-## modified from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml
-env:
-#-----------------------------------------------
-#
-# CentOS
-#
-#-----------------------------------------------
-  - distribution: centos-8
-  - distribution: centos-7
-  - distribution: centos-6
-
-#--------------------------------
-#
-# Fedora
-#
-#--------------------------------
-  - distribution: fedora-33
-  - distribution: fedora-32
-  - distribution: fedora-31
-  - distribution: fedora-30
-  - distribution: fedora-29
-  - distribution: fedora-28
-  - distribution: fedora-27
-  - distribution: fedora-26
-
-#--------------------------------
-#
-# Ubuntu
-#
-#--------------------------------
-  - distribution: ubuntu-20.04
-  - distribution: ubuntu-18.04
-  - distribution: ubuntu-16.04
-  - distribution: ubuntu-14.04
-
-#--------------------------------
-#
-# Debian
-#
-#--------------------------------
-  - distribution: debian-10
-  - distribution: debian-9
-  - distribution: debian-8
-
-##
-
-# https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L155-L156
-before_install:
-  - 'docker pull diodonfrost/${distribution}-ansible:latest'
-
-# from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L164-L165
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+deploy:
+  provider: script
+  script: ansible-playbook -i 'localhost,' ci/deploy.yml -e "tag=$TRAVIS_TAG"
+  'on':
+    tags: true
+    condition: $DISTRO = centos7
