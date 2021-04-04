@@ -17,10 +17,10 @@ script:
   - ansible-lint roles/*
   - yamllint roles/*
   # - 'distribution=${distribution} molecule lint'
-  # from: https://github.com/diodonfrost/ansible-role-vagrant/blob/master/.travis.yml#L162
+  # from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L162
   - 'distribution=${distribution} molecule test'
 
-## modified from: https://github.com/diodonfrost/ansible-role-vagrant/blob/master/.travis.yml
+## modified from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml
 env:
 #-----------------------------------------------
 #
@@ -66,10 +66,10 @@ env:
 
 ##
 
-# https://github.com/diodonfrost/ansible-role-vagrant/blob/master/.travis.yml#L155-L156
+# https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L155-L156
 before_install:
   - 'docker pull diodonfrost/${distribution}-ansible:latest'
 
-# from: https://github.com/diodonfrost/ansible-role-vagrant/blob/master/.travis.yml#L164-L165
+# from: https://github.com/diodonfrost/ansible-role-vagrant/blob/3ecbde5ef63fce6cc7bff7fd625af0461a88a7f0/.travis.yml#L164-L165
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
