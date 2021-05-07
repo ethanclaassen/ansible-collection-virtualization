@@ -3,15 +3,16 @@
 # https://docs.vmware.com/en/VMware-Workstation-Pro/15.0/com.vmware.ws.using.doc/GUID-42F4754B-7547-4A4D-AC08-353D321A051B.html
 
 - name: download VMware Workstation bundle
-  get_url:
-    dest: /tmp/vmware-workstation.bundle
-    url: "{{ vmware_bundle_url }}"
-    checksum: "{{ vmware_bundle_checksum }}"
-    headers:
-      Accept-Language: 'en-US,en;q=0.5'
-      Connection: 'keep-alive'
-      User-Agent: 'Mozilla'
-    mode: "0777"
+  command:
+    cmd: |
+      curl --fail --silent --show-error --location --compressed
+      "{{ vmware_bundle_url }}"
+      -H 'Accept-Language: en-US,en;q=0.5'
+      -H 'Connection: keep-alive'
+      -H 'User-Agent: Mozilla'
+      -o /tmp/vmware-workstation.bundle
+  args:
+    creates: /tmp/vmware-workstation.bundle
 
 - name: Ensure /etc/init.d directory exists
   file:
