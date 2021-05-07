@@ -9,6 +9,8 @@ vmware_required_packages_centos_7:
   - kernel-headers
   - "@Development Tools"
   - ncurses-libs
+  # because of #11
+  - curl
 
 vmware_required_packages_rhel_8:
   - libXinerama
@@ -17,6 +19,8 @@ vmware_required_packages_rhel_8:
   - kernel-devel
   - kernel-headers
   - ncurses-compat-libs
+  # because of #11
+  - curl
 
 vmware_required_packages_fedora_30:
   - libXinerama
@@ -26,6 +30,8 @@ vmware_required_packages_fedora_30:
   - elfutils-libelf-devel
   - "@Development Tools"
   - ncurses-compat-libs
+  # because of #11
+  - curl
 
 vmware_required_packages_ubuntu_1804:
   - build-essential
@@ -33,6 +39,8 @@ vmware_required_packages_ubuntu_1804:
   - gcc
   - libpcsclite1
   - "linux-headers-{{ ansible_kernel }}"
+  # because of #11
+  - curl
 
 vmware_required_packages_debian_10:
   - build-essential
@@ -40,3 +48,5 @@ vmware_required_packages_debian_10:
   - gcc
   - libpcsclite1
   - "linux-headers-{{ ansible_kernel }}"
+  # because of #11
+  - curl
