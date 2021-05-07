@@ -14,6 +14,12 @@
   args:
     creates: /tmp/vmware-workstation.bundle
 
+- name: Ensure bundle is executable directory exists
+  file:
+    path: /tmp/vmware-workstation.bundle
+    state: file
+    mode: '0755'
+
 - name: Ensure /etc/init.d directory exists
   file:
     path: /etc/init.d
