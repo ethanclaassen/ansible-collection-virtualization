@@ -7,12 +7,14 @@
     cmd: |
       curl --fail --silent --show-error --location --compressed
       "{{ vmware_bundle_url }}"
-      -H 'Accept-Language: en-US,en;q=0.5'
-      -H 'Connection: keep-alive'
-      -H 'User-Agent: Mozilla'
-      -o /tmp/vmware-workstation.bundle
+      -h 'accept-language: en-us,en;q=0.5'
+      -h 'connection: keep-alive'
+      -h 'user-agent: mozilla'
+      -o /tmp/vmware-workstation.bundle || rm -f /tmp/vmware-workstation.bundle
   args:
     creates: /tmp/vmware-workstation.bundle
+  retries: 3
+  delay: 5
 
 - name: Ensure bundle is executable directory exists
   file:
