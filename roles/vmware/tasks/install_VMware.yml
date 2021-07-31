@@ -10,7 +10,7 @@
       -h 'accept-language: en-us,en;q=0.5'
       -h 'connection: keep-alive'
       -h 'user-agent: mozilla'
-      -o /tmp/vmware-workstation.bundle || rm -f /tmp/vmware-workstation.bundle
+      -o /tmp/vmware-workstation.bundle
   args:
     creates: /tmp/vmware-workstation.bundle
   retries: 3
