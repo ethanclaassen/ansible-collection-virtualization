@@ -16,3 +16,11 @@
 - name: 'RedHat'
   include_tasks: install_RedHat.yml
   when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_version']|int <= 8
+
+- name: 'Install libvirt plugin'
+  include_tasks: install_libvirt.yml
+  when:
+    - libvirt_pls is defined
+    - libvirt_pls
+    # only implementing in debian right now, because that is my only experience/testing systems
+    - ansible_facts['os_family'] == "Debian"

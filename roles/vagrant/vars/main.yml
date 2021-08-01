@@ -18,3 +18,12 @@ debian_packages:
 
 ubuntu_packages:
   - "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
+
+libvirt_debian_packages:
+  - ebtables
+  - dnsmasq-base
+  - libxslt-dev
+  - libxml2-dev
+  - libvirt-dev
+  - zlib1g-dev
+  - ruby-dev

@@ -1,0 +1,22 @@
+---
+# Install vagrant-libvirt on Debian
+- name: check if qemu is installed
+  ansible.builtin.stat:
+    path: /usr/bin/qemu-system-x86_64
+  register: qemu_check
+
+- name: Fail if the file does not exist
+  ansible.builtin.fail:
+    msg: "You need to install kvm/qemu before running this."
+  when: not qemu_check.stat.exists
+
+- name: install Debian packages
+  ansible.builtin.package:
+    name: "{{ lookup('vars', 'libvirt_' + ansible_os_family | lower + '_packages' ) }}"
+    state: present
+  become: yes
+
+- name: installing the vagrant libvirt plugin
+  ansible.builtin.command:
+    cmd: vagrant plugin install vagrant-libvirt
+    creates: '{{ ansible_user_dir }}/.vagrant.d/plugins.json'
