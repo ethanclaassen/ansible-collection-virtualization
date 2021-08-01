@@ -7,9 +7,9 @@
     cmd: |
       curl --fail --silent --show-error --location --compressed
       "{{ vmware_bundle_url }}"
-      -h 'accept-language: en-us,en;q=0.5'
-      -h 'connection: keep-alive'
-      -h 'user-agent: mozilla'
+      -H 'accept-language: en-us,en;q=0.5'
+      -H 'connection: keep-alive'
+      -H 'user-agent: mozilla'
       -o /tmp/vmware-workstation.bundle
   args:
     creates: /tmp/vmware-workstation.bundle
