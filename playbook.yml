@@ -3,14 +3,16 @@
 
 - hosts: all
   connection: local
-  become: yes
+  # become: yes
   gather_facts: yes
+  vars:
+    libvirt_pls: true
   roles:
+    - role: kvm
+    - role: vmware
+    - role: virtualbox
+    - role: docker
+    - role: podman
+    - role: lxd
     - role: packer
     - role: vagrant
-    - role: virtualbox
-    - role: kvm
-    - role: docker
-    # - role: podman
-    # - role: lxd
-    # - role: vmware
