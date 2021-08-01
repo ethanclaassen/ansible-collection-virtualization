@@ -2,6 +2,11 @@
 # vars file for docker
 snap_version: false
 
+# os distribution ( i.e. Debian, Ubuntu, etc...)
+os_distri: "{{ ansible_facts['distribution'] | lower }}"
+# os distribution release ( i.e. focal, xenial, buster, etc...)
+os_distri_release: "{{ ansible_facts['distribution_release'] | lower }}"
+
 ubuntu_prereq_packages:
   - apt-transport-https
   - ca-certificates
