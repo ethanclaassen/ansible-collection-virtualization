@@ -40,8 +40,6 @@
   become: yes
   when: not snap_version
 
-- name: Install Docker snap version
-  snap:
-    name: docker
-  become: yes
+- name: snap version
+  include_tasks: snap_install.yml
   when: snap_version
