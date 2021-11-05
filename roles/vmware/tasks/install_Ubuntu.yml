@@ -8,3 +8,11 @@
     state: present
   when: ansible_facts['distribution'] == "Ubuntu"
   become: yes
+
+- name: install special requirements on Ubuntu >= 1804
+  apt:
+    name: "xorg"
+    state: present
+    install_recommends: false
+  when: ansible_facts['distribution'] == "Ubuntu"
+  become: yes
