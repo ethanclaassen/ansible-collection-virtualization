@@ -41,6 +41,13 @@ vmware_required_packages_ubuntu_1804:
   - "linux-headers-{{ ansible_kernel }}"
   # because of #11
   - curl
+  # because x11 stuff
+  - libx11-6
+  - libxext6
+  - libxi6
+  - libxinerama1
+  - libxcursor1
+  - libxtst6
 
 vmware_required_packages_debian_10:
   - build-essential
