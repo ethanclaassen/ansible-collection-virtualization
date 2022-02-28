@@ -27,3 +27,4 @@ libvirt_debian_packages:
   - libvirt-dev
   - zlib1g-dev
   - ruby-dev
+  - build-essential
