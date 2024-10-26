@@ -1,0 +1,8 @@
+---
+# Install kvm on AlmaLinux
+
+# - name: install AlmaLinux packages
+#   package:
+#     name: "{{ almalinux_packages }}"
+#     state: present
+#   become: yes
